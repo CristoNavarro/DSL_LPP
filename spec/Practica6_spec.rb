@@ -580,3 +580,33 @@ RSpec.describe PlatoA do
 		end
 	end
 end
+
+RSpec.describe Plato do
+	before (:all) do
+                @chocolate = Alimento.new("Chocolate", 5.3, 47.0, 30.0, 2.3, 3.4)
+		@vaca = Alimento.new("Carne de vaca", 21.1,0.0,3.1,50.0,164.0)
+                @nuez = Alimento.new("Nuez", 20.0, 21.0, 54.0, 0.3, 7.9)
+		@huevo = Alimento.new("Huevo", 13.0, 1.1, 11.0, 4.2, 5.7)
+		@leche = Alimento.new("Leche de vaca", 3.3, 4.8, 3.2, 3.2, 8.9)
+
+		@plato1 = Plato.new("Hamburguesa") do
+			nombre "Hamburguesa especial de la casa"
+			alimento @vaca, :descripcion => "carne de vaca", :gramos => 100
+			alimento @huevo, :descripcion => "huevo", :gramos => 20
+		end
+
+		@plato2 = Plato.new("Turron") do
+			nombre "Turron de chocolate con leche y nueces"
+			alimento @chocolate, :descripcion => "chocolate", :gramos => 80
+			alimento @leche, :descripcion => "leche de vaca", :gramos => 30
+			alimento @nuez, :descripcion => "nuez", :gramos => 25
+		end
+	end
+
+	context "Comprobando el funcionamiento del DSL de platos: " do
+		it "Comprobando que se crea correctamente un plato." do
+			expect(@plato1.to_s).to eq("Hamburguesa especial de la casa\n===============================\n\nIngredientes: carne de vaca(100 gr), huevo(20 gr)\n")
+			expect(@plato2.to_s).to eq("Turron de chocolate con leche y nueces\n======================================\n\nIngredientes: chocolate(80 gr), leche de vaca(30 gr), nuez(25 gr)\n")
+		end
+	end
+end
