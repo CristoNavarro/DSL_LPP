@@ -35,7 +35,23 @@ class Plato
 
 		@alimentos.each { |i| suma += i.kcal_total }
 
-		suma
+		suma.round(2)
+	end
+
+	def gases_total
+		suma = 0
+
+		@alimentos.each { |i| suma += i.gases }
+
+		suma.round(2)
+	end
+
+	def terreno_total
+		suma = 0
+
+		@alimentos.each { |i| suma += i.terreno }
+
+		suma.round(2)
 	end
 
 	def to_s
@@ -44,6 +60,8 @@ class Plato
 		output << "Ingredientes: #{@desc_alimentos.join(', ')}\n"
 		output << "Valores nutricionales-ambientales: \n"
 		output << "Energia = #{energia_total} kcal\n"
+		output << "Gases = #{gases_total} kgCO2\n"
+		output << "Terreno = #{terreno_total} m2"
 		output
 	end
 end
