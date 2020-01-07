@@ -599,8 +599,8 @@ RSpec.describe Plato do
 
 	context "Comprobando el funcionamiento del DSL de platos: " do
 		it "Comprobando que se crea correctamente un plato." do
-			expect(@plato1.to_s).to eq("Hamburguesa especial de la casa\n===============================\n\nIngredientes: carne de vaca(100 gr), huevo(20 gr)\n")
-			expect(@plato2.to_s).to eq("Turron de chocolate con leche y nueces\n======================================\n\nIngredientes: chocolate(80 gr), leche de vaca(30 gr), nuez(25 gr)\n")
+			expect(@plato1.to_s).to eq("Hamburguesa especial de la casa\n===============================\n\nIngredientes: carne de vaca(100 gr), huevo(20 gr)\nValores nutricionales-ambientales: \nEnergia = 14.33 kcal\n")
+			expect(@plato2.to_s).to eq("Turron de chocolate con leche y nueces\n======================================\n\nIngredientes: chocolate(80 gr), leche de vaca(30 gr), nuez(25 gr)\nValores nutricionales-ambientales: \nEnergia = 56.45 kcal\n")
 		end
 	end
 end

@@ -19,7 +19,8 @@ class Alimentodsl
 	# Metros cuadrados de terreno usados al año
 	attr_reader :terreno
 
-	def initialize (a, valores)
+	def initialize (a, gramos, val)
+		valores = val.collect { |i| ((i * gramos) / 1000).round(2) }
                 @nombre,@proteinas,@carbohidratos,@lipidos,@gases,@terreno = a,valores[0],valores[1],valores[2],valores[3],valores[4]
         end
 
