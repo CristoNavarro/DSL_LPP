@@ -5,6 +5,7 @@ require "Practica6/lista"
 require "Practica6/platon"
 require "Practica6/platoa"
 require "Practica6/plato"
+require "Practica6/alimentodsl"
 
 module Practica6
   class Error < StandardError; end

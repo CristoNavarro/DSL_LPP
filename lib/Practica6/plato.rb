@@ -20,11 +20,14 @@ class Plato
 		@descripcion = nombre
 	end
 
-	def alimento (alimento, parametros = {})
-		@alimentos.insert([alimento])
+	def alimento (parametros = {})
 		@gramos.insert([parametros[:gramos]])
 		
 		descripcion = parametros[:descripcion]
+
+		alimento = Alimentodsl.new(descripcion, parametros[:valores])
+		@alimentos.insert([alimento])
+
 		descripcion << "(#{parametros[:gramos]} gr)"
 
 		@desc_alimentos << descripcion
