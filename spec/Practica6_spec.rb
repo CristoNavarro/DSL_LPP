@@ -604,3 +604,50 @@ RSpec.describe Plato do
 		end
 	end
 end
+
+RSpec.describe Menu do
+
+	context "Comprobando el funcionamiento del DSL de menus: " do
+		it "Comprobando que se crea y formatea correctamente un menu." do
+			plato1 = Plato.new("Hamburguesa") do
+				nombre "Hamburguesa especial de la casa"
+				alimento :descripcion => "carne de vaca", :gramos => 100, :valores => [21.1, 0.0, 3.1, 50.0, 164.0]
+				alimento :descripcion => "huevo", :gramos => 20, :valores => [13.0, 1.1, 11.0, 4.2, 5.7]
+			end
+
+			plato2 = Plato.new("Papas") do
+				nombre "Papas pequeñas"
+				alimento :descripcion => "papas", :gramos => 25, :valores => [1.1, 35.0, 0.1, 7.0, 64.2]
+			end
+
+			plato3 = Plato.new("Refresco") do
+				nombre "Refrescos de lata"
+				alimento :descripcion => "agua carbonatada", :gramos => 65, :valores => [21.1, 47.7, 3.1, 50.0, 164.0]
+			end
+
+			plato4 = Plato.new("Perrito") do
+				nombre "Perrito caliente"
+				alimento :descripcion => "cerdo", :gramos => 70, :valores => [21.5, 0.0, 6.3, 7.6, 11.0]
+				alimento :descripcion => "pan", :gramos => 100, :valores => [0.3, 24.7, 0.5, 4.2, 6.1]
+			end
+
+			menu1 = Menu.new("Combinado nº. 1") do
+				descripcion "hamburguesa, papas, refresco"
+				componente plato1, :descripcion => "Hamburguesa especial de la casa", :precio => 4.25
+				componente plato2, :descripcion => "Papas pequeñas", :precio => 1.75
+				componente plato3, :descripcion => "Refrescos de lata", :precio => 1.50
+				precio 7.50
+			end
+
+			menu2 = Menu.new("Combinado nº. 2") do
+				descripcion "perrito, refresco"
+				componente plato4, :descripcion => "Perrito caliente", :precio => 3.75
+				componente plato3, :descripcion => "Refrescos de lata", :precio => 1.50
+				precio 5.25
+			end
+
+			expect(menu1.to_s).to eq("Combinado nº. 1 (7.5 €)\n\n========================\n\nPlatos:\nHamburguesa especial de la casa (4.25 €) || Calorias = 14.33 kcal || Gases = 5.08 kgCO2 || Terreno = 16.51 m2\nPapas pequeñas (1.75 €) || Calorias = 3.64 kcal || Gases = 0.18 kgCO2 || Terreno = 1.61 m2\nRefrescos de lata (1.5 €) || Calorias = 19.68 kcal || Gases = 3.25 kgCO2 || Terreno = 10.66 m2\nTotal: Calorias = 37.65 kcal || Gases = 8.51 kgCO2 || Terreno = 28.78 m2")
+			expect(menu2.to_s).to eq("Combinado nº. 2 (5.25 €)\n\n=========================\n\nPlatos:\nPerrito caliente (3.75 €) || Calorias = 20.45 kcal || Gases = 0.95 kgCO2 || Terreno = 1.38 m2\nRefrescos de lata (1.5 €) || Calorias = 19.68 kcal || Gases = 3.25 kgCO2 || Terreno = 10.66 m2\nTotal: Calorias = 40.13 kcal || Gases = 4.2 kgCO2 || Terreno = 12.04 m2")
+		end
+	end
+end
